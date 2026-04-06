@@ -1,0 +1,80 @@
+# Data Configuration
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  external_dir: "data/external"
+  
+  # Synthetic flood data parameters
+  n_samples: 10000
+  n_regions: 100
+  time_steps: 365
+  
+  # Feature engineering
+  temporal_lags: [1, 3, 7, 14, 30]
+  spatial_buffer_radius: 5000  # meters
+  
+  # Train/validation/test splits
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  
+  # Spatial cross-validation
+  spatial_cv_folds: 5
+  spatial_block_size: 0.1  # degrees
+
+# Model Configuration
+model:
+  # Baseline models
+  baseline_models:
+    - "logistic_regression"
+    - "random_forest"
+    - "xgboost"
+    - "lightgbm"
+  
+  # Neural network
+  neural_network:
+    hidden_layers: [64, 32]
+    dropout_rate: 0.2
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 100
+    early_stopping_patience: 10
+  
+  # Spatial ML
+  spatial_ml:
+    spatial_features: true
+    spatial_cv: true
+    spatial_buffer_features: true
+
+# Geographic Configuration
+geo:
+  # Coordinate reference system
+  crs: "EPSG:4326"
+  projected_crs: "EPSG:3857"
+  
+  # Region bounds (example: California)
+  bounds:
+    min_lon: -124.5
+    max_lon: -114.0
+    min_lat: 32.5
+    max_lat: 42.0
+  
+  # Grid resolution
+  grid_resolution: 0.01  # degrees
+
+# Visualization Configuration
+viz:
+  # Map settings
+  map_center: [37.0, -119.0]  # California center
+  map_zoom: 6
+  
+  # Color schemes
+  flood_colors:
+    low_risk: "#2E8B57"  # Sea Green
+    medium_risk: "#FFD700"  # Gold
+    high_risk: "#FF4500"  # Orange Red
+    extreme_risk: "#8B0000"  # Dark Red
+  
+  # Plot settings
+  figure_size: [12, 8]
+  dpi: 300
